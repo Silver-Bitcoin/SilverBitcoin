@@ -266,6 +266,8 @@ This implementation ensures the blockchain remains secure even against future qu
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License
+Version 2.0, January 2004
+http://www.apache.org/licenses/- see the file for details.
 
 
