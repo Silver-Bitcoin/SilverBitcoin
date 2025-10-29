@@ -17,6 +17,113 @@ The blockchain follows a modular architecture with the following layers:
 5. **Networking Layer** - Manages peer-to-peer communication
 6. **CLI Layer** - Provides command-line tools for node management
 
+## Architecture Components
+
+### 1. Consensus Layer (Advanced Tendermint-based)
+
+The consensus layer is responsible for:
+- Transaction ordering
+- Block production
+- Network agreement using a consensus algorithm (Tendermint-like)
+- Peer-to-peer networking
+
+Key features:
+- Implements ABCI++ interface
+- Handles PrepareProposal and ProcessProposal methods
+- Manages the block header with modified DataHash for data availability
+
+### 2. Data Availability Layer
+
+The data availability layer ensures:
+- All block data is published and available
+- Data is erasure coded into a data square
+- Light clients can verify data availability through sampling
+- Merkle commitments to row and column roots
+
+Key features:
+- Erasure coding implementation
+- Data availability sampling (DAS)
+- Namespace-based data ordering
+- 2D Reed-Solomon encoding
+
+### 3. Application Layer (Advanced Cosmos SDK-based)
+
+The application layer provides:
+- State machine logic
+- Cosmos SDK modules
+- gRPC and REST APIs
+- CLI tools for node management
+- Blob (binary large object) handling
+
+Key features:
+- Built with Cosmos SDK principles
+- Modular module system
+- Account and token management
+- Governance capabilities
+
+### 4. Execution Layer
+
+The execution layer handles:
+- Smart contract execution
+- Transaction processing
+- State transitions
+- Virtual machine implementation (WASM-based)
+
+Key features:
+- WASM smart contract runtime
+- Gas metering and limits
+- State transition functions
+- Contract deployment and management
+
+## Component Interactions
+
+```
++-------------------+     +---------------------+     +------------------+
+|   Execution       |     |   Application       |     |   Consensus      |
+|   Layer           |<--->|   Layer             |<--->|   Layer          |
+|                   |     |                     |     |                  |
++-------------------+     +----------+----------+     +--------+---------+
+                                    |                         |
+                                    |                         |
+                                    v                         v
+                          +---------------------+    +------------------+
+                          |   Data Availability |    |   Networking     |
+                          |   Layer             |    |                  |
+                          +---------------------+    +------------------+
+```
+
+## Benefits of Modular Architecture
+
+1. **Scalability** - Each layer can be optimized independently
+2. **Specialization** - Components can focus on specific tasks
+3. **Interoperability** - Easy integration with other modular chains
+4. **Flexibility** - Developers can choose which layers to use
+5. **Security** - Separation of concerns reduces attack surface
+6. **Upgradability** - Individual layers can be upgraded without affecting others
+
+## Quantum-Resistant Cryptography
+
+The modular blockchain implements quantum-resistant cryptography using the NIST-standardized CRYSTALS algorithms:
+
+### CRYSTALS-Dilithium
+- Used for digital signatures throughout all layers
+- Provides 128-bit security level against quantum computer attacks
+- Protects transaction integrity and block signatures
+
+### CRYSTALS-Kyber
+- Used for key encapsulation in the networking layer
+- Provides post-quantum secure key exchange
+- Secures peer-to-peer communications
+
+## Implementation Plan
+
+1. Start with the consensus and data availability layers as the foundation
+2. Build the application layer on top
+3. Add execution layer for smart contracts
+4. Implement networking and CLI tools
+5. Create APIs for external interaction
+6. Test integration between all layers
+
 ## Features
 
 - **Modular Design**: Each layer can be developed, optimized, and upgraded independently
@@ -160,3 +267,5 @@ This implementation ensures the blockchain remains secure even against future qu
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
